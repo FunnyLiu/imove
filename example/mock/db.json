@@ -9,13 +9,18 @@
         "width": 80,
         "height": 40
       },
+      "attrs": {
+        "label": {
+          "text": "返回数据"
+        }
+      },
       "shape": "imove-behavior",
       "data": {
-        "label": "处理",
+        "label": "返回数据",
         "configSchema": "{\n  \"schema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"textarea_FyaArd\": {\n        \"title\": \"Textarea\",\n        \"type\": \"string\",\n        \"format\": \"textarea\",\n        \"description\": \"文本编辑框\"\n      },\n      \"select_jrGW8n\": {\n        \"title\": \"Select\",\n        \"type\": \"string\",\n        \"enum\": [\n          \"a\",\n          \"b\",\n          \"c\"\n        ],\n        \"enumNames\": [\n          \"早\",\n          \"中\",\n          \"晚\"\n        ],\n        \"description\": \"下拉单选\"\n      }\n    },\n    \"ui:displayType\": \"row\",\n    \"ui:showDescIcon\": true\n  },\n  \"displayType\": \"row\",\n  \"showDescIcon\": true\n}",
         "configData": {},
         "dependencies": "{\n  \n}",
-        "code": "export default async function(ctx) {\n  console.log('1212')\n}"
+        "code": "// 节点: 返回数据\nconst doSomething = (data) => {\n  // TODO: 数据加工处理\n  return data;\n};\n\nexport default async function(ctx) {\n  // 这里获取到的上游数据，不是\"接口成功\"这个分支节点的返回值，而是\"请求profile接口\"这个节点的返回值\n  const pipe = ctx.getPipe() || {};\n  ctx.emit('updateUI', {profileData: doSomething(pipe.data)});\n}"
       },
       "ports": {
         "groups": {
@@ -99,14 +104,19 @@
         "width": 80,
         "height": 80
       },
+      "attrs": {
+        "label": {
+          "text": "获取个人信息"
+        }
+      },
       "shape": "imove-start",
       "data": {
-        "label": "开始",
+        "label": "获取个人信息",
         "configSchema": "{\n  \"schema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"input_1aWdPV\": {\n        \"title\": \"Input\",\n        \"type\": \"string\",\n        \"description\": \"输入框\"\n      },\n      \"dateRangeSelect_mPNhq_\": {\n        \"title\": \"DateRange\",\n        \"type\": \"range\",\n        \"format\": \"date\",\n        \"description\": \"日期范围选择\"\n      }\n    },\n    \"ui:displayType\": \"row\",\n    \"ui:showDescIcon\": true\n  },\n  \"displayType\": \"row\",\n  \"showDescIcon\": true\n}",
         "configData": {},
-        "trigger": "start",
+        "trigger": "getProfile",
         "dependencies": "{\n  \n}",
-        "code": "export default async function(ctx) {\n  \n}"
+        "code": "export default async function() {\n  return {success:true}\n}"
       },
       "ports": {
         "groups": {
@@ -190,9 +200,14 @@
         "width": 80,
         "height": 40
       },
+      "attrs": {
+        "label": {
+          "text": "请求成功"
+        }
+      },
       "shape": "imove-branch",
       "data": {
-        "label": "判断",
+        "label": "请求成功",
         "configSchema": "{\"schema\":{\"type\":\"object\",\"properties\":{\"input_MudoMs\":{\"title\":\"Input\",\"type\":\"string\",\"description\":\"输入框\"}},\"ui:displayType\":\"row\",\"ui:showDescIcon\":true},\"displayType\":\"row\",\"showDescIcon\":true}",
         "configData": {},
         "dependencies": "{\n  \n}",
@@ -341,9 +356,14 @@
         "width": 80,
         "height": 40
       },
+      "attrs": {
+        "label": {
+          "text": "失败提示"
+        }
+      },
       "shape": "imove-behavior",
       "data": {
-        "label": "处理",
+        "label": "失败提示",
         "configSchema": "{\n  \"schema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"textarea_rdO5RK\": {\n        \"title\": \"Textarea\",\n        \"type\": \"string\",\n        \"format\": \"textarea\",\n        \"description\": \"文本编辑框\"\n      }\n    },\n    \"ui:displayType\": \"row\",\n    \"ui:showDescIcon\": true\n  },\n  \"displayType\": \"row\",\n  \"showDescIcon\": true\n}",
         "configData": {},
         "dependencies": "{\n  \n}",
